@@ -2,7 +2,8 @@
 # ============LICENSE_START=======================================================
 # org.onap.aai
 # ================================================================================
-# Copyright © 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2020 Nokia Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,16 +23,16 @@
 # Declare variables to be passed into your templates.
 global: # global defaults
   nodePortPrefix: 302
-  legacyReadinessRepository: oomk8s
-  legacyReadinessImage: readiness-check:2.2.2
+  readinessImage: onap/oom/readiness:3.0.1
 
 
 # application image
 repository: nexus3.onap.org:10001
-image: onap/aai-graphadmin:1.6.3
+image: onap/aai-graphadmin:1.7.1
 pullPolicy: Always
 restartPolicy: Always
 flavor: small
+flavorOverride: small
 # default number of instances
 replicaCount: 1
 
@@ -83,6 +84,12 @@ config:
         ageZip: 5
         # Deletes the dataSnapshot graphson files older than 30 days
         ageDelete: 30
+  # Concurrency lock control flag
+  aai:
+    lock:
+      uri:
+        enabled: false
+
 
 nodeSelector: {}
 

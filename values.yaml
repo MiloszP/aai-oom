@@ -1,5 +1,6 @@
-# Copyright © 2017 Amdocs, Bell Canada
-# Modifications Copyright © 2018 AT&T
+# Copyright (c) 2017 Amdocs, Bell Canada
+# Modifications Copyright (c) 2018 AT&T
+# Modifications Copyright (c) 2020 Nokia
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +23,7 @@ global: # global defaults
   dockerhubRepository: docker.io
   busyboxImage: busybox
 
-  legacyReadinessRepository: oomk8s
-  legacyReadinessImage: readiness-check:2.2.2
+  readinessImage: onap/oom/readiness:3.0.1
 
   loggingRepository: docker.elastic.co
   loggingImage: beats/filebeat:5.5.0
@@ -249,11 +249,11 @@ global: # global defaults
       version:
         # Current version of the REST API
         api:
-          default: v20
+          default: v21
         # Specifies which version the depth parameter is configurable
         depth: v11
         # List of all the supported versions of the API
-        list: v11,v12,v13,v14,v15,v16,v17,v18,v19,v20
+        list: v11,v12,v13,v14,v15,v16,v17,v18,v19,v20,v21
         # Specifies from which version related link should appear
         related:
           link: v11
@@ -301,6 +301,7 @@ image: aaionap/haproxy:1.4.2
 pullPolicy: Always
 
 flavor: small
+flavorOverride: small
 
 # flag to enable debugging - application support required
 debugEnabled: false
